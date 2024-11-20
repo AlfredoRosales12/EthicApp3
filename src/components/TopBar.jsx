@@ -1,17 +1,20 @@
-// src/components/TopBar.js
-import React from 'react';
-import { AppBar, Toolbar, IconButton, Typography } from '@mui/material';
+import React, { useContext } from 'react';
+import { AppBar, Toolbar, Typography, IconButton } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
+import { DrawerContext } from './DrawerContext'; // Importa el contexto
 
-function TopBar({ toggleDrawer }) {
+function TopBar({isSmallScreen}){
+  const { isDrawerOpen, toggleDrawer } = useContext(DrawerContext); // Usa el contexto
   return (
-    <AppBar position="fixed">
+    <AppBar position="static" color="primary" elevation={0}>
       <Toolbar>
-        <IconButton edge="start" color="inherit" onClick={toggleDrawer}>
-          <MenuIcon />
-        </IconButton>
-        <Typography variant="h6" noWrap>
-          Mi Aplicación
+        {isSmallScreen && (
+          <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>
+            <MenuIcon />
+          </IconButton>
+        )}
+        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+        Inicio
         </Typography>
       </Toolbar>
     </AppBar>
