@@ -5,12 +5,12 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    port: 3000, // Cambia el puerto si lo necesitas
+    port: 3001, // Cambia el puerto si lo necesitas
     open: true, // Abre automáticamente el navegador al iniciar el servidor
     hmr: {
       protocol: 'ws', // Usa WebSocket para Hot Module Replacement (HMR)
       host: 'localhost',
-      port: 3000, // Asegúrate de que el puerto de HMR coincida
+      port: 3001, // Asegúrate de que el puerto de HMR coincida
     },
     watch: {
       usePolling: true, // Usa polling si los cambios no se detectan automáticamente

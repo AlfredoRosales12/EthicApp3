@@ -6,15 +6,15 @@ import { DrawerContext } from './DrawerContext'; // Importa el contexto
 function TopBar({isSmallScreen}){
   const { isDrawerOpen, toggleDrawer } = useContext(DrawerContext); // Usa el contexto
   return (
-    <AppBar position="static" color="primary" elevation={0}>
+    <AppBar position="static" color="" elevation={0}>
       <Toolbar>
         {isSmallScreen && (
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>
             <MenuIcon />
           </IconButton>
         )}
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        Inicio
+        <Typography variant="h4" component="div" sx={{ flexGrow: 1 }}>
+          Inicio
         </Typography>
       </Toolbar>
     </AppBar>

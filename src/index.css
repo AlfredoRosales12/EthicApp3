@@ -66,3 +66,14 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
+
+.botonInicio{
+  font-size: 20px; /* Tamaño de texto */
+  padding: 16px 32px; /* Padding interno */
+  width: 450px; /* Ancho fijo */
+  height: 70px; /* Altura fija */
+  border-radius: 12px; /* Bordes redondeados */
+}
+.botonInicio:hover{
+  background-color: #303f9f; /* Fondo más oscuro al pasar el mouse */
+}
