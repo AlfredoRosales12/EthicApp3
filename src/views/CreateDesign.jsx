@@ -24,7 +24,8 @@ function CreateDesign() {
           display: 'flex', 
           flexDirection: 'column',
           height: '100vh',
-          width:'100%',                       
+          width:'100%', 
+          maxWidth:'100%',         
           }}
         >       
           <AppBar isSmallScreen={isSmallScreen}/>

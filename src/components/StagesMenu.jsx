@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { Button,Tabs, Tab, Box, Typography } from '@mui/material';
+import ActivityDesigner from '../components/StageDesign';
 
 const StagesMenu = () => {
   const [currentStep, setCurrentStep] = useState(0);
-
   const handleStepChange = (event, newStep) => {
     setCurrentStep(newStep);
   };
@@ -27,13 +27,13 @@ const StagesMenu = () => {
         <Tab label="Etapa 1" />
         <Tab label="Etapa 2" />
         <Tab label="Etapa 3" />
-        <Tab label="Etapa 4" />          
+        <Tab label="Etapa 4" />
         
       </Tabs>
 
       {/* Contenido de cada Etapa */}
       <Box sx={{ padding: 2 }}>
-        {currentStep === 0 && <Typography>Contenido de la Etapa 1</Typography>}
+        {currentStep === 0 && <ActivityDesigner/>}
         {currentStep === 1 && <Typography>Contenido de la Etapa 2</Typography>}
         {currentStep === 2 && <Typography>Contenido de la Etapa 3</Typography>}
         {currentStep === 3 && <Typography>Contenido de la Etapa 4</Typography>}
