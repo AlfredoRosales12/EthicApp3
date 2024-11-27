@@ -46,7 +46,7 @@ function CreateDesign() {
               autoComplete="off"
             >
             <TextField id="outlined-basic" label="Título" variant="outlined" slotProps={{input: {readOnly:false,},}}/>
-            <h6>Agregar Documento de Apoyo</h6>
+            <h3>Agregar Documento de Apoyo</h3>
             <FileUpload/> 
             <StagesMenu/>
             </Box>     
