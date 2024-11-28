@@ -1,5 +1,5 @@
 import * as React from 'react';
-import {Button,Box,CssBaseline,ThemeProvider} from '@mui/material';
+import {Button,Box,CssBaseline,ThemeProvider,Typography} from '@mui/material';
 import {useMediaQuery } from '@mui/material';
 import AppBar from '../components/AppBar';
 import DrawerMenu from '../components/DrawerMenu';
@@ -12,6 +12,7 @@ import StagesMenu from '../components/StagesMenu';
 
 function CreateDesign() {
   const isSmallScreen = useMediaQuery('(max-width:600px)'); // Detecta si la pantalla es pequeña 600 px
+
   //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
@@ -40,13 +41,19 @@ function CreateDesign() {
               component="form"
               sx={{ display: 'flex', 
                 flexDirection: 'column',
-                gap: '10px',
+                gap: '5px',
               }}
               noValidate
               autoComplete="off"
             >
-            <TextField id="outlined-basic" label="Título" variant="outlined" slotProps={{input: {readOnly:false,},}}/>
-            <h3>Agregar Documento de Apoyo</h3>
+            <Typography sx={{ margin: '2px' }} variant="h6">
+            Título de la Actividad
+            </Typography>  
+            <TextField id="outlined-basic" helperText="Este campo es obligatorio"  label="Título" variant="outlined" slotProps={{input: {readOnly:false,},}}/>
+            <Typography sx={{ margin: '2px' }} variant="h6">
+              Agregar Documento de Apoyo
+            </Typography> 
+            
             <FileUpload/> 
             <StagesMenu/>
             </Box>     

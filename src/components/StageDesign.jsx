@@ -1,5 +1,6 @@
 import React, { useState} from "react";
 import {
+    Box,
     Accordion,
     AccordionSummary,
     AccordionDetails,
@@ -13,6 +14,8 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import 'react-quill-new/dist/quill.snow.css'; // Estilo base de Quill
 import ReactQuill from "react-quill-new";
 import DifferentialField from "./DifferentialField";
+import OrdinationField from "./OrdinationField";
+import Segmented from "./SegmentedButtons"
 
 const QuestionCanvas = () => {    
 
@@ -62,7 +65,7 @@ const QuestionCanvas = () => {
                 );
             case "Ordenacion":
                 return (
-                    <h6>Ordenación</h6>
+                    <OrdinationField/>
                 );
             default:
                 return null;
@@ -71,9 +74,12 @@ const QuestionCanvas = () => {
 
     return (
         <div style={{ padding: "20px", fontFamily: "Arial, sans-serif", width:"100%",maxWidth:"100%"}}>
-            <Button variant="contained" onClick={handleAddQuestion} style={{ marginBottom: "1rem" }}>
-                Agregar Pregunta
-            </Button>
+            <Box sx={{display:'flex', alignItems: 'center',justifyContent: 'space-between', height: '50px',marginBottom:"25px" }}>            
+                <Button variant="contained" onClick={handleAddQuestion}>
+                    Agregar Pregunta
+                </Button>
+                <Segmented/>
+            </Box>
             {/* Lienzo de preguntas */}
             <div
                 style={{
