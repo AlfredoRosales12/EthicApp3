@@ -17,7 +17,16 @@ import DifferentialField from "./DifferentialField";
 import OrdinationField from "./OrdinationField";
 import Segmented from "./SegmentedButtons"
 
-const QuestionCanvas = () => {    
+function stripHtml(html) {
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = html;
+    return tempDiv.textContent || tempDiv.innerText || "";
+  }
+  
+
+const QuestionCanvas = () => { 
+    
+   
 
     const [savedQuestions, setSavedQuestions] = useState([]);
     const handleSaveQuestion = (index) => {
@@ -61,7 +70,7 @@ const QuestionCanvas = () => {
                 );
             case "Diferencial":
                 return (
-                    <DifferentialField value={value} onChange={onChange}/>
+                    <DifferentialField value={value}/>
                 );
             case "Ordenacion":
                 return (
@@ -113,8 +122,11 @@ const QuestionCanvas = () => {
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls={`panel${index}-content`}
                                 id={`panel${index}-header`}
+                                sx={{display:'flex', justifyContent:'space-between'}}
                             >
-                                <Typography>{`Pregunta ${index + 1} ${question.text}` }</Typography>
+                               
+                                <Typography>{`${index + 1}.- ` }</Typography>
+                                <div dangerouslySetInnerHTML={{ __html: questions[index]?.text || "" }} />                                
                                 <Typography
                                     style={{
                                         marginLeft: "auto",
@@ -123,16 +135,19 @@ const QuestionCanvas = () => {
                                 >
                                     {isQuestionSaved(index) ? "Guardado" : "No Guardado"}
                                 </Typography>
+                           
                             </AccordionSummary>
                             <AccordionDetails>
                                 
                                 <ReactQuill
                                     theme="snow"                                 
                                     placeholder="Formula tu pregunta aquí..."
-                                    style={{ marginBottom: "20px" }}                                    
+                                    value={questions[index]?.text || ""}
+                                    onChange={(value) => handleEditQuestion(index, "text", value)}
+                                    style={{height:'200px' }}                                    
                                 />
                                 
-                                <div style={{ marginBottom: "1rem" }}>
+                                <div style={{ marginTop: "75px", marginBottom:"30px" }}>
                                     <Typography>Tipo de Respuesta:</Typography>
                                     <Select
                                         fullWidth

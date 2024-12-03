@@ -20,7 +20,7 @@ export default function NavListDrawer({navLinks}){
                     }             
                 </List>
             </nav>
-            <Divider/>
+            
             <nav>
                 
             </nav>
