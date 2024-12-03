@@ -15,6 +15,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   // Override media queries injected by theme.mixins.toolbar
   '@media all': {
     minHeight: 128,
+    height: '129px'
   },
 }));
 
@@ -23,7 +24,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 export default function ProminentAppBar({isSmallScreen}) {
   const { isDrawerOpen, toggleDrawer } = useContext(DrawerContext); // Usa el contexto
   return (   
-      <AppBar position="static">
+      <AppBar position="static" sx={{backgroundImage: 'linear-gradient(45deg, #1A3578, #2649EC)'}}>
         <StyledToolbar>
         {isSmallScreen ? (
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>

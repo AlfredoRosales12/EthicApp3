@@ -27,6 +27,8 @@ const FileUpload = () => {
         '&:hover': {
           backgroundColor: '#f0f0f0',
         },
+
+        width:'100%',
       }}
       onClick={() => document.getElementById('file-input').click()} // Simula clic en el input oculto
     >

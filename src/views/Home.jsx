@@ -1,4 +1,4 @@
-import {Button,Box,CssBaseline,ThemeProvider} from '@mui/material';
+import {Button,Box,CssBaseline,ThemeProvider, Typography} from '@mui/material';
 import {useMediaQuery } from '@mui/material';
 import TopBar from '../components/TopBar';
 import DrawerMenu from '../components/DrawerMenu';
@@ -9,6 +9,7 @@ import UploadFileIcon from '@mui/icons-material/UploadFile';
 import theme from '../components/theme'; // Importar el tema personalizado
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
+import ButtonGroupHome2 from '../components/ButtonGroupHome2';
 
  
 
@@ -23,48 +24,31 @@ function Home() {
   //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
   return (
-    <ThemeProvider theme={theme}>    
-    <DrawerProvider>    
-      <Box sx={{display: 'flex'}}>
-        <CssBaseline /> 
-        <DrawerMenu isSmallScreen={isSmallScreen}/>      
-        <Box sx={{        
-          display: 'flex', 
-          flexDirection: 'column',
-          height: '100vh',
-          width:'100%'             
-          }}
-        >       
-          <TopBar isSmallScreen={isSmallScreen}/>      
-          <Box sx={{
-              flexGrow: 1, // Hace que el contenido ocupe el espacio restante
-              p: 3,
-              overflow: 'auto', // Habilita el scroll si el contenido excede la pantalla        
-            }}
-          >                
-            <h1>Bienvenido</h1>  
-            <Box
-              sx={{
-                display: 'grid',
-                gridTemplateColumns: '1fr 1fr', // Define dos columnas iguales
-                gap: 1, // Espacio entre los botones
-                padding: '0px',
-                height:{ xs: "50px", sm: "200px", md: "300px" },
-              }}
-            >
-              <Button variant="contained" onClick={handleClick} startIcon={<DesignServicesIcon/>}>Diseñar una Actividad</Button>
-              <Button variant="contained" startIcon={<UploadFileIcon/>}>Lanzar una Actividad</Button>
-              <Button variant="contained">Compartir un Diseño de Actividad</Button>
-              <Button variant="contained">Buscar Diseños Compartidos</Button>
-            </Box> 
-            <h2>Actividades Recientes</h2>
-            <Box>
-                <CardSlider/>
+    <ThemeProvider theme={theme}>  
+      <CssBaseline />   
+      <DrawerProvider>    
+        <Box sx={{display: 'flex'}}>
+          <DrawerMenu isSmallScreen={isSmallScreen}/>
+          <Box sx={{display:'flex', flexDirection:'column', height:'100%', width:'100%'}}>       
+            <TopBar isSmallScreen={isSmallScreen}/>
+            <Box sx={{display:'flex', flexDirection:'column', gap:'2px', m:'10px 25px'}}>
+              <Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize:'40px'}}>                
+                Bienvenido
+              </Typography>                              
+              Diseña una nueva actividad para realizar con tu curso, o lanza una actividad basada en algún diseño. 
+              <br/>
+              También puedes compartir una actividad con colegas y buscar actividades compartidas por otros.
             </Box>
-          </Box>        
+            <ButtonGroupHome2/> {/*Botones del Inicio*/}  
+            <Box sx={{display:'flex', flexDirection:'column', gap:'15px', m:'0px 25px'}}>              
+              <Typography variant="h3" component="div" sx={{ flexGrow: 1, fontSize:'35px' }}>                
+                Actividades Recientes              
+              </Typography>
+              <CardSlider/>
+            </Box>                 
+          </Box>
         </Box>
-      </Box>
-    </DrawerProvider>
+      </DrawerProvider>
     </ThemeProvider>
   );
 }

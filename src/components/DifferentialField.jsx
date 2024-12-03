@@ -1,5 +1,6 @@
-import React from "react";
-import { Typography, TextField,RadioGroup, FormControlLabel, Radio } from "@mui/material";
+
+import React, { useState } from "react";
+import { Typography, Box, TextField, RadioGroup, FormControlLabel, Radio } from "@mui/material";
 
 const DifferentialField = ({ value, onChange }) => {
     return (
@@ -12,41 +13,44 @@ const DifferentialField = ({ value, onChange }) => {
                     fullWidth
                     value={value.scale || ""}
                     onChange={(e) => onChange({ ...value, scale: e.target.value })}
+                    onWheel={(e) => e.target.blur()} // Evita cambios con el scroll del TextField de Escala
                     placeholder="Introduce la escala (cantidad de opciones)"
                 />
             </div>
 
             {/* Vista dinámica para los botones de radio */}
             {value.scale > 0 && (
-                <div style={{ marginBottom: "1rem" }}>
-                <Typography>Opciones de la Escala:</Typography>
-                <RadioGroup
-                    row
-                    value={value.selectedOption || ""}
-                    onChange={(e) => onChange({ ...value, selectedOption: e.target.value })}
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                    }}
-                >
-                    {[...Array(Number(value.scale))].map((_, index) => (
-                        <div
-                            key={index}
-                            style={{
-                                display: "flex",
-                                flexDirection: "column",
-                                alignItems: "center",
-                                margin: "0 10px",
-                            }}
-                        >
-                            <Radio value={`${index + 1}`} />
-                            <Typography>{`${index + 1}`}</Typography>
-                        </div>
-                    ))}
-                </RadioGroup>
-            </div>
+                <div>
+                    <Typography>Escala de respuestas de diferencial semántico:</Typography>
+                    <Box sx={{display:'flex', justifyContent:'space-between', margin:'20px 0px' }}>
+                        <TextField/>
+                        <RadioGroup row>
+                            {[...Array(parseInt(value.scale, 10))].map((_, index) => (
+                                <FormControlLabel
+                                    key={index}
+                                    value={index + 1}
+                                    control={<Radio />}
+                                    label={`${index + 1}`}
+                                />
+                            ))}
+                        </RadioGroup>
+                        <TextField/>
+                    </Box>
+                    
+                </div>
             )}
+        </div>
+    );
+};
 
+// Ejemplo de uso
+const App = () => {
+    const [value, setValue] = useState({ scale: 0 }); // Estado inicial
+
+    return (
+        <Box p={2}>
+            <Typography variant="h4">Formulario de Diferencial Semántico</Typography>
+            <DifferentialField value={value} onChange={setValue} />
             {/* Campo para el largo mínimo de comentario */}
             <div style={{ marginBottom: "1rem" }}>
                 <Typography>Largo Mínimo de Comentario (Opcional):</Typography>
@@ -58,8 +62,9 @@ const DifferentialField = ({ value, onChange }) => {
                     placeholder="Introduce el largo mínimo de comentario"
                 />
             </div>
-        </div>
+        </Box>
     );
 };
 
-export default DifferentialField;
+export default App;
+
