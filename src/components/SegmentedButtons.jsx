@@ -3,19 +3,20 @@ import { ToggleButtonGroup, ToggleButton, Box, Typography } from '@mui/material'
 import GroupsIcon from '@mui/icons-material/Groups';
 import PersonIcon from '@mui/icons-material/Person';
 
-const SegmentedButton = () => {
-  const [selected, setSelected] = useState('roles');
+const SegmentedButton = ({onSegmentChange}) => {
+  const [selected, setSelected] = useState('individual');
 
   const handleSelection = (event, newSelection) => {
     if (newSelection !== null) {
       setSelected(newSelection);
+      if (onSegmentChange) onSegmentChange(newSelection);
     }
   };
 
   return (
-    <Box sx={{display:'flex',alignItems:'center',gap:'15px' }}>
-      <Typography variant="h7" sx={{ }}>
-        Tipo de Actividad:
+    <Box sx={{display:'flex',alignItems:'center',gap:'5px'}}>
+      <Typography variant="h7">
+        Modo de Interacción:
       </Typography>
       <ToggleButtonGroup
         value={selected}
@@ -24,23 +25,26 @@ const SegmentedButton = () => {
         sx={{
           border: '1px solid #ccc',
           borderRadius: '8px',
+          
         }}
       >
         <ToggleButton
-          value="roles"
+          value="group"
           sx={{
             textTransform: 'none',
             '&.Mui-selected': { backgroundColor: 'primary.main', color: '#fff' },
+          
           }}
         >
             <GroupsIcon/>
             Grupal
         </ToggleButton>
         <ToggleButton
-          value="posiciones"
+          value="individual"
           sx={{
             textTransform: 'none',
             '&.Mui-selected': { backgroundColor: 'primary.main', color: '#fff' },
+            
           }}
         >
           <PersonIcon/>

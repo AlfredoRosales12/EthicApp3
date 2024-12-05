@@ -9,8 +9,7 @@ const DifferentialField = ({ value, onChange }) => {
             <div style={{ marginBottom: "1rem" }}>
                 <Typography>Escala:</Typography>
                 <TextField
-                    type="number"
-                    fullWidth
+                    type="number"                    
                     value={value.scale || ""}
                     onChange={(e) => onChange({ ...value, scale: e.target.value })}
                     onWheel={(e) => e.target.blur()} // Evita cambios con el scroll del TextField de Escala
@@ -55,11 +54,8 @@ const App = () => {
             <div style={{ marginBottom: "1rem" }}>
                 <Typography>Largo Mínimo de Comentario (Opcional):</Typography>
                 <TextField
-                    type="number"
-                    fullWidth
-                    value={value.minCommentLength || ""}
-                    onChange={(e) => onChange({ ...value, minCommentLength: e.target.value })}
-                    placeholder="Introduce el largo mínimo de comentario"
+                    type="number"                   
+                    placeholder="0"
                 />
             </div>
         </Box>

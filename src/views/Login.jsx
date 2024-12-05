@@ -13,8 +13,8 @@ function Login() {
   return (
     <Box display="flex" flexDirection="column" alignItems="center" justifyContent="center" minHeight="100vh">
       <Typography variant="h4" gutterBottom>Iniciar sesión</Typography>
-      <TextField label="Usuario" margin="normal" fullWidth />
-      <TextField label="Contraseña" type="password" margin="normal" fullWidth />
+      <TextField label="Usuario" margin="normal"  />
+      <TextField label="Contraseña" type="password" margin="normal" />
       <Button variant="contained" color="primary" onClick={handleLogin}>Ingresar</Button>
     </Box>
   );
