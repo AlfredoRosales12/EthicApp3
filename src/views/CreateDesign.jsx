@@ -17,60 +17,60 @@ function CreateDesign() {
 
   return (
     <ThemeProvider theme={theme}>    
-    <DrawerProvider>    
-      <Box sx={{display: 'flex'}}>
-        <CssBaseline /> 
-        <DrawerMenu isSmallScreen={isSmallScreen}/>               
-        <Box sx={{        
-          display: 'flex', 
-          flexDirection: 'column',
-          height: '100vh',
-          width:'100%', 
-          maxWidth:'100%',         
-          }}
-        >       
-          <AppBar isSmallScreen={isSmallScreen}/>          
-          <Box sx={{
-              flexGrow: 1, // Hace que el contenido ocupe el espacio restante
-              p: 3,
-              overflow: 'auto', // Habilita el scroll si el contenido excede la pantalla 
-              width:'100%',       
+      <DrawerProvider> 
+        <CssBaseline />    
+        <Box sx={{display: 'flex', width:'100%'}}>
+          
+          <DrawerMenu isSmallScreen={isSmallScreen}/>               
+          <Box sx={{        
+            display: 'flex', 
+            flexDirection: 'column',
+            height: '100%',
+            width:'100%'                            
             }}
-          >        
-            <Box
-              component="form"
-              sx={{ display: 'flex', 
-                flexDirection: 'column',
-                gap: '10px',
+          >       
+            <AppBar isSmallScreen={isSmallScreen}/>          
+            <Box sx={{               
+                margin:'15px 50px',
+                  
               }}
-              noValidate
-              autoComplete="off"
-            >
-            <Typography sx={{ margin: '2px' }} variant="h6">
-            Título de la Actividad
-            </Typography>  
-            <TextField id="outlined-basic" helperText="Este campo es obligatorio"  label="Título" variant="outlined" slotProps={{input: {readOnly:false,},}}/>
-            <Typography sx={{ margin: '2px' }} variant="h6">
-              Agregar Documento de Apoyo
-            </Typography>             
-            <FileUpload/>
-            <Typography sx={{ margin: '2px' }} variant="h6">
-              Etapas de la actividad
-            </Typography> 
-            <StagesMenu/>
-            </Box>
-            <Box sx={{display:'flex', width:'400px',gap:'15px', paddingLeft:'40px', alignItems: 'center',justifyContent: 'space-between',marginBottom:"25px",height:'50px' }}>            
-              <Button variant="contained" sx={{width:"100%", height:"100%"}}>
-                Guardar y<br/>Lanzar Actividad
-              </Button>
-              <Button variant="contained" sx={{width:"100%", height:"100%"}}>
-                Guardar
-              </Button>                 
-            </Box>     
-          </Box>           
-        </Box>       
-      </Box>
-    </DrawerProvider>    
+            >        
+              <Box
+                component="form"
+                sx={{ display: 'flex', 
+                  flexDirection: 'column',
+                  gap: '10px',
+                  width:'100%',
+                  maxWidth:'100%'                
+                }}
+                noValidate
+                autoComplete="off"
+              >
+                <Typography sx={{ margin: '2px' }} variant="h6">
+                Título de la Actividad
+                </Typography>  
+                <TextField id="outlined-basic" helperText="Este campo es obligatorio"  label="Título" variant="outlined" slotProps={{input: {readOnly:false,},}}/>
+                <Typography sx={{ margin: '2px' }} variant="h6">
+                  Agregar Documento de Apoyo
+                </Typography>             
+                <FileUpload/>
+                <Typography sx={{ margin: '2px' }} variant="h6">
+                  Etapas de la actividad
+                </Typography>             
+                <StagesMenu/>                         
+              </Box>
+              <Box sx={{display:'flex', width:'400px',gap:'15px', paddingLeft:'40px', alignItems: 'center',justifyContent: 'space-between',marginBottom:"25px",height:'50px' }}>            
+                <Button variant="contained" sx={{width:"100%", height:"100%", fontSize:'12px'}}>
+                  Guardar y<br/>Lanzar Actividad
+                </Button>
+                <Button variant="contained" sx={{width:"100%", height:"100%"}}>
+                  Guardar<br/>Actividad
+                </Button>                 
+              </Box>     
+            </Box>           
+          </Box>       
+        </Box>
+      </DrawerProvider>    
     </ThemeProvider>    
   );
 }

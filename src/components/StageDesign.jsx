@@ -16,29 +16,38 @@ import ReactQuill from "react-quill-new";
 import DifferentialField from "./DifferentialField";
 import OrdinationField from "./OrdinationField";
 import Segmented from "./SegmentedButtons"
+import DropdownMenu from "./DropdownMenu";
 
-function stripHtml(html) {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html;
-    return tempDiv.textContent || tempDiv.innerText || "";
-  }
-  
+const QuestionCanvas = () => {
 
-const QuestionCanvas = () => { 
-    
-   
+    const [expanded, setExpanded] = useState(false); // Estado para controlar el acordeón
+
+    const handleChange = (panel) => (event, isExpanded) => {
+      setExpanded(isExpanded ? panel : false); // Cambiar el estado
+    };
+
+    const toggleAccordion = (index) => {
+        const panelId = questions[index]?.id;
+        setExpanded((prevExpanded) => (prevExpanded === panelId ? false : panelId));
+      };
 
     const [savedQuestions, setSavedQuestions] = useState([]);
+
     const handleSaveQuestion = (index) => {
       setSavedQuestions((prev) => {
         const updated = [...prev];
         updated[index] = true;
+        toggleAccordion(index);
         return updated;
       });
+
+
     };
 
-    const [questions, setQuestions] = useState([]); // Lista de preguntas
+    // Lista de preguntas
+    const [questions, setQuestions] = useState([]); 
     const isQuestionSaved = (index) => savedQuestions[index] === true;
+
     // Agregar nueva pregunta
     const handleAddQuestion = () => {
         setQuestions((prevQuestions) => [
@@ -61,6 +70,14 @@ const QuestionCanvas = () => {
         setQuestions((prevQuestions) => prevQuestions.filter((_, i) => i !== index));
     };
 
+    //Estado para controlar el botón individual o grupal
+    const [selectedSegment, setSelectedSegment] = useState(null);
+
+    const handleSegmentChange = (segment) => {
+      setSelectedSegment(segment);
+    };
+
+
     // Renderizar campo dinámico basado en el tipo de pregunta
     const renderDynamicField = (type, value, onChange) => {
         switch (type) {
@@ -81,13 +98,39 @@ const QuestionCanvas = () => {
         }
     };
 
+    const menuTypeAgrupation = [
+        { label: "Aleatorio" },        
+        { label: "Performance Homogéneo" },
+        { label: "Perfromance Heterogéneo" },       
+        { label: "Tipo de Conocimiento Homogéneo" },
+        { label: "Tipo de Conocimiento Heterogéneo" },
+        { label: "Usar anterior" }
+      ];
+    
+      
+
     return (
-        <div style={{ padding: "20px", fontFamily: "Arial, sans-serif", width:"100%",maxWidth:"100%"}}>
-            <Box sx={{display:'flex', alignItems: 'center',justifyContent: 'space-between', height: '50px',marginBottom:"25px" }}>            
-                <Button variant="contained" onClick={handleAddQuestion}>
-                    Agregar Pregunta
+        <>
+            <Box sx={{display:'flex',justifyContent: 'space-between', alignItems:'center', width:'100%', margin:'10px 0px', height:'auto' }}>            
+                <Button variant="contained" onClick={handleAddQuestion} sx={{height:'50px'}}>
+                    Nueva Pregunta
                 </Button>
-                <Segmented/>
+                <Segmented onSegmentChange={handleSegmentChange}/>
+                <Box sx={{
+                    display: selectedSegment === "group" ? "flex" : "none", 
+                    flexDirection:'column',
+                    gap:2
+                }}>
+                    <DropdownMenu options={menuTypeAgrupation} title={"Método de Agrupación"} />
+                    <Box sx={{display:'flex', alignItems:'center',gap:'4px'}}>
+                        Número de estudiantes por grupo:                       
+                        <TextField
+                            type="number"                   
+                            placeholder="2"
+                        />
+                    </Box>
+                </Box>
+                
             </Box>
             {/* Lienzo de preguntas */}
             <div
@@ -116,7 +159,8 @@ const QuestionCanvas = () => {
                                     MaxWidth:"100%",
                                     border: `2px solid ${isQuestionSaved(index) ? "green" : "red"}`,
                                 }}
-
+                            onChange={handleChange(index)} // Maneja cambios individuales
+                            expanded={expanded===index}
                         >
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
@@ -126,7 +170,7 @@ const QuestionCanvas = () => {
                             >
                                
                                 <Typography>{`${index + 1}.- ` }</Typography>
-                                <div dangerouslySetInnerHTML={{ __html: questions[index]?.text || "" }} />                                
+                                <div dangerouslySetInnerHTML={{ __html: questions[index]?.text || "Pregunta Vacía" }} />                                
                                 <Typography
                                     style={{
                                         marginLeft: "auto",
@@ -149,14 +193,13 @@ const QuestionCanvas = () => {
                                 
                                 <div style={{ marginTop: "75px", marginBottom:"30px" }}>
                                     <Typography>Tipo de Respuesta:</Typography>
-                                    <Select
-                                        fullWidth
+                                    <Select                                    
                                         value={question.type}
                                         onChange={(e) => handleEditQuestion(index, "type", e.target.value)}
-                                    >
-                                        <MenuItem value="Texto">Texto</MenuItem>
+                                    >                                       
                                         <MenuItem value="Diferencial">Diferencial Semántico</MenuItem>
                                         <MenuItem value="Ordenacion">Ordenación</MenuItem>
+                                        <MenuItem value="Texto">Texto</MenuItem>
                                     </Select>
                                 </div>
 
@@ -189,7 +232,7 @@ const QuestionCanvas = () => {
                     </div>
                 )}    
             </div>
-        </div>
+        </>
     );
 };
 

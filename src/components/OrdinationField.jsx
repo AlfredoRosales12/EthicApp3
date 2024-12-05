@@ -67,7 +67,7 @@ const ButtonsPanel = () => {
           {/* Campo de texto para el rol */}
           <TextField
             label="Rol"
-            fullWidth
+           
             value={role.role}
             onChange={(e) => handleRoleChange(index, 'role', e.target.value)}
             sx={{ flex: '1 1 200px' }}

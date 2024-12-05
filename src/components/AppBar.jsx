@@ -14,8 +14,7 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
   paddingBottom: theme.spacing(2),
   // Override media queries injected by theme.mixins.toolbar
   '@media all': {
-    minHeight: 128,
-    height: '129px'
+    height: '80px'
   },
 }));
 
