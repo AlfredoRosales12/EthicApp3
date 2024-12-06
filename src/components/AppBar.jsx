@@ -20,14 +20,14 @@ const StyledToolbar = styled(Toolbar)(({ theme }) => ({
 
 
 
-export default function ProminentAppBar({isSmallScreen}) {
+export default function ProminentAppBar({isSmallScreen, titleBar}) {
   const { isDrawerOpen, toggleDrawer } = useContext(DrawerContext); // Usa el contexto
   return (   
       <AppBar position="static" sx={{backgroundImage: 'linear-gradient(45deg, #1A3578, #2649EC)'}}>
         <StyledToolbar>
         {isSmallScreen ? (
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>
-            <MenuIcon />
+            <MenuIcon/>
           </IconButton>
           ):(
             <IconButton
@@ -36,6 +36,7 @@ export default function ProminentAppBar({isSmallScreen}) {
               color="inherit"
               aria-label="open drawer"
               sx={{ mr: 2 }}
+              href='/inicio'
             >            
               <ArrowBackIcon />
             </IconButton>)
@@ -46,7 +47,7 @@ export default function ProminentAppBar({isSmallScreen}) {
             component="div"
             sx={{ flexGrow: 1, alignSelf: 'flex-end' }}
           >
-            Crear Diseño de Actividad
+            {titleBar}
           </Typography>          
         </StyledToolbar>
       </AppBar>
