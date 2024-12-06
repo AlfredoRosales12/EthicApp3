@@ -7,7 +7,7 @@ function Login() {
 
   const handleLogin = () => {
     // Lógica de autenticación aquí
-    navigate('/home');
+    navigate('/inicio');
   };
 
   return (

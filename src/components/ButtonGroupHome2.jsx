@@ -3,22 +3,26 @@ import { styled } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
+import { useNavigate } from 'react-router-dom';
 
 const images = [
   {
     url: 'src/assets/design-activity.jpeg',
     title: 'Diseñar una Actividad',
     width: '20%',
+    path: '/crearDiseño'
   },
   {
     url: 'src/assets/launch-activity.jpeg',
     title: 'Lanzar Actividad',
     width: '20%',
+    path: '/lanzarActividad'
   },
   {
     url: 'src/assets/search-designs.jpeg',
     title: 'Buscar Diseños de Actividades',
     width: '20%',
+    path: '/actividadesDiseñadas'
   },
 ];
 
@@ -86,7 +90,9 @@ const ImageMarked = styled('span')(({ theme }) => ({
   transition: theme.transitions.create('opacity'),
 }));
 
+
 export default function ButtonBaseDemo() {
+  const navigate = useNavigate();
   return (
     <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%',gap:5, justifyContent:'center',padding:'10px 0'}}>
       {images.map((image) => (
@@ -96,6 +102,8 @@ export default function ButtonBaseDemo() {
           style={{
             width: image.width,
           }}
+         
+          href={image.path}
         >
           <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
           <ImageBackdrop className="MuiImageBackdrop-root" />

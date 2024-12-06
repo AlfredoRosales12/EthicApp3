@@ -9,7 +9,7 @@ export default function NavListDrawer({navLinks}){
                 <List>
                     {navLinks.map((item) => (
                         <ListItem disablePadding key={item.title}>
-                            <ListItemButton component="a" href="#trash">                            
+                            <ListItemButton component="a" href={item.path}>                            
                                 <ListItemIcon>
                                     {item.icon}
                                 </ListItemIcon>

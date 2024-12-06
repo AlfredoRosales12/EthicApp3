@@ -8,24 +8,26 @@ import AssignmentIcon from '@mui/icons-material/Assignment';
 import DrawIcon from '@mui/icons-material/Draw';
 import { DrawerContext } from './DrawerContext'; // Importa el contexto
 import BottomDrawer from './BottomDrawer'
+import { useNavigate } from 'react-router-dom';
 
 const navLinks = [
   {
-    title:"Inicio", path:"#", icon:<HomeIcon/>
+    title:"Inicio", path:"/inicio", icon:<HomeIcon/>
   },
   {
-    title:"Lanzar Actividad", path:"#", icon:<RocketLaunchIcon/>
+    title:"Lanzar Actividad", path:"/lanzarActividad", icon:<RocketLaunchIcon/>
   },
   {
-    title:"Actividad", path:"#", icon:<AssignmentIcon/>
+    title:"Actividades Lanzadas", path:"/actividadesLanzadas", icon:<AssignmentIcon/>
   },
   {
-    title:"Diseños", path:"#", icon:<DrawIcon/>
+    title:"Diseños de Actividades", path:"/actividadesDiseñadas", icon:<DrawIcon/>
   }
 ]
 
 function DrawerMenu({isSmallScreen}) {
   const { isDrawerOpen, toggleDrawer } = useContext(DrawerContext); // Usa el contexto  
+  const navigate = useNavigate();
   return (
     <Drawer anchor="left" open={isDrawerOpen} onClose={()=>toggleDrawer(false)} variant={isSmallScreen?'temporary':'permanent'}
       sx={{       

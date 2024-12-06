@@ -29,7 +29,7 @@ function CreateDesign() {
             width:'100%'                            
             }}
           >       
-            <AppBar isSmallScreen={isSmallScreen}/>          
+            <AppBar isSmallScreen={isSmallScreen} titleBar="Crear Diseño de Actvidad"/>          
             <Box sx={{               
                 margin:'15px 50px',
                   
