@@ -1,13 +1,30 @@
 import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
-import UploadFileIcon from '@mui/icons-material/UploadFile';
+import { Box, Typography, Paper, Alert } from '@mui/material';
+import { UploadFile as UploadFileIcon, Close as CloseIcon } from '@mui/icons-material';
+import theme from '../components/theme'; // Importar el tema personalizado
 
-const FileUpload = () => {
-  const [fileName, setFileName] = useState('');
+const FileUploader = () => {
+  const [file, setFile] = useState(null);
+  const [previewUrl, setPreviewUrl] = useState(null);
 
   const handleFileChange = (event) => {
-    const file = event.target.files[0];
-    setFileName(file ? file.name : '');
+    const selectedFile = event.target.files[0];
+    if (selectedFile) {
+      setFile(selectedFile);
+
+      // Si es una imagen, generar una URL para previsualización
+      if (selectedFile.type.startsWith('image/')) {
+        const fileUrl = URL.createObjectURL(selectedFile);
+        setPreviewUrl(fileUrl);
+      } else {
+        setPreviewUrl(null);
+      }
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setFile(null);
+    setPreviewUrl(null);
   };
 
   return (
@@ -16,34 +33,79 @@ const FileUpload = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'center',
-        border: '2px dashed #3f51b5',
-        borderRadius: '8px',
-        padding: '16px',
-        width: '300px',
+        gap: 2,
+        p: 3,
+        border: !file ? ('2px dashed #2649EC'):('2px #2649EC'),
+        borderRadius: 2,
+        backgroundColor: theme.palette.primary.gradient,
         textAlign: 'center',
+        Width: '100%',        
         cursor: 'pointer',
-        backgroundColor: '#f9f9f9',
         '&:hover': {
-          backgroundColor: '#f0f0f0',
+          backgroundColor: '#e3f2fd',
         },
-
-        width:'100%',
       }}
-      onClick={() => document.getElementById('file-input').click()} // Simula clic en el input oculto
+      onClick={() => document.getElementById('fileInput').click()}
     >
-      <UploadFileIcon sx={{ fontSize: 40, color: '#3f51b5' }} />
-      <Typography variant="body1" sx={{ marginTop: 1 }}>
-        {fileName || 'Haz clic para adjuntar un archivo'}
-      </Typography>
       <input
         type="file"
-        id="file-input"
-        style={{ display: 'none' }}
+        id="fileInput"
+        hidden
         onChange={handleFileChange}
       />
+      {!file ? (
+        <>
+          <UploadFileIcon color="primary" sx={{ fontSize: 48 }} />
+          <Typography variant="h6" color="textSecondary">
+            Haz clic aquí para subir un archivo
+          </Typography>
+        </>
+      ) : (
+        <>
+          <Alert severity="success" sx={{ width: '100%' }}>
+            Archivo subido correctamente
+          </Alert>
+          <Paper
+            elevation={3}
+            sx={{
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              p: 2,
+              borderRadius: 1,
+              width: '100%',
+              textAlign: 'center',
+            }}
+          >
+            {previewUrl ? (
+              <img
+                src={previewUrl}
+                alt="Vista previa"
+                style={{
+                  maxWidth: '100%',
+                  maxHeight: 200,
+                  marginBottom: 10,
+                  borderRadius: 8,
+                }}
+              />
+            ) : (
+              <Typography variant="body1" noWrap>
+                {file.name}
+              </Typography>
+            )}
+            <Typography variant="caption" color="textSecondary">
+              Tamaño: {(file.size / 1024).toFixed(2)} KB
+            </Typography>
+          </Paper>
+          <CloseIcon
+            color="error"
+            sx={{ alignSelf: 'flex-end', cursor: 'pointer', mt: 2 }}
+            onClick={handleRemoveFile}
+          />
+        </>
+      )}
     </Box>
   );
 };
 
-export default FileUpload;
+export default FileUploader;

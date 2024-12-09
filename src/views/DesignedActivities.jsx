@@ -182,7 +182,7 @@ const ActivityDesignsView = () => {
                         </Typography>
                         <Divider sx={{ marginY: 1 }} />
                         <Typography variant="body1">
-                        En esta página puedes:
+                            En esta página puedes:
                         </Typography>
                         <ul>
                             <li>

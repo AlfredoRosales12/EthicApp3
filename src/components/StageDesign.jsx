@@ -7,6 +7,7 @@ import {
     Typography,
     TextField,
     Button,
+    IconButton,
     MenuItem,
     Select,
 } from "@mui/material";
@@ -17,6 +18,10 @@ import DifferentialField from "./DifferentialField";
 import OrdinationField from "./OrdinationField";
 import Segmented from "./SegmentedButtons"
 import DropdownMenu from "./DropdownMenu";
+import theme from '../components/theme'; // Importar el tema personalizado
+import PopoverTypeActivity from './PopoverTypeActivity';
+import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
+
 
 const QuestionCanvas = () => {
 
@@ -52,7 +57,7 @@ const QuestionCanvas = () => {
     const handleAddQuestion = () => {
         setQuestions((prevQuestions) => [
             ...prevQuestions,
-            { text: "", type: "Texto" }, // Nueva pregunta con tipo por defecto "Texto"
+            { text: "", type: "Ordenacion" }, // Nueva pregunta con tipo por defecto "Ordenación"
         ]);
     };
 
@@ -111,11 +116,15 @@ const QuestionCanvas = () => {
 
     return (
         <>
-            <Box sx={{display:'flex',justifyContent: 'space-between', alignItems:'center', width:'100%', margin:'10px 0px', height:'auto' }}>            
-                <Button variant="contained" onClick={handleAddQuestion} sx={{height:'50px'}}>
-                    Nueva Pregunta
-                </Button>
+            <Box sx={{display:'flex',flexDirection:{
+                xs: 'column',           // Valor para xs (pantallas extra pequeñas)
+                sm: 'row',       // Valor para sm (pantallas pequeñas)
+                md: 'row',    // Valor para md (pantallas medianas)
+                lg: 'row', // Valor para lg (pantallas grandes)
+                }, justifyContent: 'space-between', alignItems:'center', width:'100%', margin:'10px 0px', height:'auto', gap:'15px' }}>            
+                
                 <Segmented onSegmentChange={handleSegmentChange}/>
+                               
                 <Box sx={{
                     display: selectedSegment === "group" ? "flex" : "none", 
                     flexDirection:'column',
@@ -130,6 +139,9 @@ const QuestionCanvas = () => {
                         />
                     </Box>
                 </Box>
+                <Button variant="contained" startIcon={<PlaylistAddIcon/>} onClick={handleAddQuestion} sx={{height:'50px', background: theme.palette.primary.gradient, color:'#ffff'}}>
+                    Nueva Pregunta
+                </Button>
                 
             </Box>
             {/* Lienzo de preguntas */}
@@ -161,24 +173,25 @@ const QuestionCanvas = () => {
                                 }}
                             onChange={handleChange(index)} // Maneja cambios individuales
                             expanded={expanded===index}
-                        >
+                        >                            
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls={`panel${index}-content`}
                                 id={`panel${index}-header`}
                                 sx={{display:'flex', justifyContent:'space-between'}}
                             >
-                               
-                                <Typography>{`${index + 1}.- ` }</Typography>
-                                <div dangerouslySetInnerHTML={{ __html: questions[index]?.text || "Pregunta Vacía" }} />                                
-                                <Typography
-                                    style={{
-                                        marginLeft: "auto",
-                                        color: isQuestionSaved(index) ? "green" : "red",
-                                    }}
-                                >
-                                    {isQuestionSaved(index) ? "Guardado" : "No Guardado"}
-                                </Typography>
+                                <Box sx={{display:'flex', width:'100%', alignItems:'center', justifyContent:'space-around'}}>
+                                    <Typography>{`${index + 1}.- ` }</Typography>
+                                    <div dangerouslySetInnerHTML={{ __html: questions[index]?.text || "Pregunta Vacía" }} />                                
+                                    <Typography
+                                        style={{
+                                            marginLeft: "auto",
+                                            color: isQuestionSaved(index) ? "green" : "red",
+                                        }}
+                                    >
+                                        {isQuestionSaved(index) ? "Guardado" : "No Guardado"}
+                                    </Typography>
+                                </Box>
                            
                             </AccordionSummary>
                             <AccordionDetails>
@@ -191,9 +204,10 @@ const QuestionCanvas = () => {
                                     style={{height:'200px' }}                                    
                                 />
                                 
-                                <div style={{ marginTop: "75px", marginBottom:"30px" }}>
+                                <div style={{ marginTop: "75px", marginBottom:"30px"}}>
                                     <Typography>Tipo de Respuesta:</Typography>
-                                    <Select                                    
+                                    <Select
+                                        sx={{width:'auto'}}                                    
                                         value={question.type}
                                         onChange={(e) => handleEditQuestion(index, "type", e.target.value)}
                                     >                                       
@@ -201,6 +215,7 @@ const QuestionCanvas = () => {
                                         <MenuItem value="Ordenacion">Ordenación</MenuItem>
                                         <MenuItem value="Texto">Texto</MenuItem>
                                     </Select>
+                                    <PopoverTypeActivity/>
                                 </div>
 
                                 <div style={{ marginBottom: "1rem" }}>

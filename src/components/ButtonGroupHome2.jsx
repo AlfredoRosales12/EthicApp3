@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
 import { useNavigate } from 'react-router-dom';
+import theme from '../components/theme'; // Importar el tema personalizado
 
 const images = [
   {
@@ -30,7 +31,7 @@ const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: 300,
   [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
+    width: '85% !important', // Overrides inline-style
     height: 100,
   },
   '&:hover, &.Mui-focusVisible': {
@@ -53,8 +54,16 @@ const ImageSrc = styled('span')({
   right: 0,
   top: 0,
   bottom: 0,
-  backgroundSize: 'cover',
+  backgroundSize: 'cover',  
   backgroundPosition: 'center',
+  [theme.breakpoints.down('sm')]: {
+    backgroundSize: 'auto',   
+    backgroundPosition: '0px -80px',    
+  },  
+
+  
+ 
+  
 });
 
 const Image = styled('span')(({ theme }) => ({
@@ -94,7 +103,7 @@ const ImageMarked = styled('span')(({ theme }) => ({
 export default function ButtonBaseDemo() {
   const navigate = useNavigate();
   return (
-    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%',gap:5, justifyContent:'center',padding:'10px 0'}}>
+    <Box sx={{ display: 'flex', flexWrap: 'wrap', minWidth: 300, width: '100%', gap:5, justifyContent:'center',padding:'10px 0'}}>
       {images.map((image) => (
         <ImageButton
           focusRipple

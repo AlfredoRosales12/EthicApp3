@@ -6,6 +6,7 @@ import CardActions from '@mui/material/CardActions';
 import Typography from '@mui/material/Typography';
 import { styled } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import theme from '../components/theme'; // Importar el tema personalizado
 
 // Styled component for modern card appearance
 const StyledCard = styled(Card)(({ theme }) => ({
@@ -49,13 +50,20 @@ function CardSlider() {
   return (
     <Box sx={{
       display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr 1fr', // Define dos columnas iguales
+        gridTemplateColumns:{
+          xs: '1fr',           // Valor para xs (pantallas extra pequeñas)
+          sm: '1fr 1fr',       // Valor para sm (pantallas pequeñas)
+          md: '1fr 1fr 1fr',    // Valor para md (pantallas medianas)
+          lg: '1fr 1fr 1fr 1fr', // Valor para lg (pantallas grandes)
+        },
+        
         gap: 1, // Espacio entre los botones
         padding: '0px',
-        height:{ xs: "50px", sm: "200px", md: "300px" },
+        height:'100%',
+        width:'100%',
     }}>
       {cardData.map((card, index) => (
-        <StyledCard key={index} sx={{ minWidth: 280, height:180}}>
+        <StyledCard key={index} sx={{ minWidth: 280, height:180, width:'100%'}}>
           <CardContent>
             <Typography variant="h5" component="div" gutterBottom>
               {card.title}

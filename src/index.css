@@ -10,6 +10,7 @@
   color-scheme: light dark;
   color: rgba(255, 255, 255, 0.87);
   background-color: #242424;
+  min-height: 100vh;
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -31,9 +32,8 @@ body {
   padding: 0;
   display: flex;
   width:100%;
-  max-width: 100%;  
-  min-width: 340px;
   min-height: 100vh;
+  
 }
 
 h1 {
@@ -82,4 +82,8 @@ button:focus-visible {
 }
 .botonInicio:hover{
   background-color: #303f9f; /* Fondo más oscuro al pasar el mouse */
+}
+html{
+  min-height: 100vh;
+  height: 100%; /* Asegura que el body ocupe toda la altura */
 }

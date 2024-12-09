@@ -37,6 +37,14 @@ const ButtonsPanel = () => {
     setRoles(updatedRoles);
   };
 
+  const handleJustifyAllPositions = () => {
+    const updatedPositions = roles.map((position) => ({
+      ...position,
+      position: true,
+    }));
+    setRoles(updatedPositions);
+  };
+
   return (
     <Box sx={{ p: 2 }}>
       {/* Botones principales */}
@@ -44,7 +52,7 @@ const ButtonsPanel = () => {
         <Button variant="contained" onClick={handleJustifyAllRoles}>
           Justificar todos los roles
         </Button>
-        <Button variant="contained" onClick={() => alert('Justificar todas las posiciones')}>
+        <Button variant="contained" onClick={handleJustifyAllPositions}>
           Justificar todas las posiciones
         </Button>
         <Button variant="outlined" onClick={handleAddRole}>

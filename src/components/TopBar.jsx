@@ -9,10 +9,10 @@ function TopBar({isSmallScreen}){
   return (
     <AppBar position="static" color="" elevation={0}>
       <Toolbar sx={{p:0, backgroundImage:'linear-gradient(45deg,#1A3578 , #2649EC)'}}>
-      <Box sx={{display:'flex',alignItems:'baseline',marginLeft:2}}>        
+      <Box sx={{display:'flex',alignItems:'baseline'}}>        
         {isSmallScreen ? (          
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>
-            <MenuIcon sx={{color:'#ffff'}} />
+            <MenuIcon sx={{color:'#ffff', marginLeft:2}} />
           </IconButton>       
         ):(
           <IconButton edge="start" color="inherit" aria-label="menu" onClick={()=>toggleDrawer(true)}>

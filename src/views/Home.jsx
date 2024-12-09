@@ -10,18 +10,16 @@ import theme from '../components/theme'; // Importar el tema personalizado
 import { useNavigate } from 'react-router-dom';
 import '../index.css';
 import ButtonGroupHome2 from '../components/ButtonGroupHome2';
-
+import ButtonGroupHome from '../components/ButtonGroupHome';
  
 
 function Home() {
   const navigate = useNavigate();
   const handleClick = () => {
-    // Puedes realizar acciones aquí antes de navegar
-    console.log('Navegando a Diseño');
+    //console.log('Navegando a Diseño');
     navigate('/CreateDesign');
   };
-  const isSmallScreen = useMediaQuery('(max-width:600px)'); // Detecta si la pantalla es pequeña 600 px
-  //const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
+  const isSmallScreen = useMediaQuery(theme.breakpoints.down("sm")); // Detecta si la pantalla es mediana 1024px
 
   return (
     <ThemeProvider theme={theme}>  
@@ -29,9 +27,9 @@ function Home() {
       <DrawerProvider>    
         <Box sx={{display: 'flex'}}>
           <DrawerMenu isSmallScreen={isSmallScreen}/>
-          <Box sx={{display:'flex', flexDirection:'column', height:'100%', width:'100%'}}>       
+          <Box sx={{display:'flex', flexDirection:'column', width:'100%'}}>       
             <TopBar isSmallScreen={isSmallScreen}/>
-            <Box sx={{display:'flex', flexDirection:'column', gap:'2px', m:'10px 25px'}}>
+            <Box sx={{display:'flex', flexDirection:'column', gap:'2px', m:'10px 60px'}}>
               <Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize:'40px'}}>                
                 Bienvenido
               </Typography>                              
@@ -39,9 +37,9 @@ function Home() {
               <br/>
               También puedes compartir una actividad con colegas y buscar actividades compartidas por otros.
             </Box>
-            <ButtonGroupHome2/> {/*Botones del Inicio*/}  
-            <Box sx={{display:'flex', flexDirection:'column', gap:'15px', m:'0px 25px'}}>              
-              <Typography variant="h3" component="div" sx={{ flexGrow: 1, fontSize:'35px' }}>                
+             <ButtonGroupHome2/>           
+            <Box sx={{display:'flex', flexDirection:'column', gap:'8px', m:'15px 60px'}}>              
+              <Typography variant="h1" component="div" sx={{ flexGrow: 1, fontSize:'25px' }}>                
                 Actividades Recientes              
               </Typography>
               <CardSlider/>

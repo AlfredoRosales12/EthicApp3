@@ -5,7 +5,8 @@ import '@fontsource/montserrat-alternates/600.css';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#4B5998', // Color principal (azul por defecto)
+      main: '#1a3578', // Color principal (azul por defecto)
+      gradient: 'linear-gradient(45deg,#1A3578 , #2649EC)', // Degradado personalizado.
     },
     secondary: {
       main: '#9B8753', // Color secundario 
@@ -21,10 +22,10 @@ const theme = createTheme({
   },
   breakpoints: {
     values: {
-      laptop: 1024,
-      tablet: 640,
-      mobile: 0,
-      desktop: 1280,
+      xs: 0,
+      sm: 1024,
+      md: 1280,
+      lg: 1440,
     },
   },
 
